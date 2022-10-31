@@ -4,16 +4,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Chromosome {
+
     private boolean isFitnessChanged = true;
     private int[] genes ;
     private double fitness=0;
     public int totalSalary=0;
     public int totalExperience=0;
     public int timeFinish=0;
+
     public int[] beginTask = new int[505];
     public int[] endTask = new int[505];
     public int[] timeSt = new int[505];
     public int[] timeFn = new int[505];
+
     public Chromosome(int len)
     {
         genes = new int[len];
@@ -34,6 +37,7 @@ public class Chromosome {
         {
             recalculateFitness(data);
             double x = (data.w1*timeFinish/data.maxDeadline  +data.w2*totalSalary/data.maxSalary +data.w3*(data.maxEper-totalExperience)/data.maxEper);
+
             fitness = x;
             isFitnessChanged = false;
         }
@@ -47,10 +51,12 @@ public class Chromosome {
     public void recalculateFitness(Data data)
     {
         ArrayList < Integer > lst = new ArrayList <Integer >();
+
         int[] lastMan = new int[505];
         int[] timeTask = new int[505];
         int[] working_total = new int[505];
         int[] worker_task = new int[505];
+
         for(int i=1;i<=data.numOfPeople;++i)
         {
             timeSt[i] = 0;
@@ -70,10 +76,12 @@ public class Chromosome {
             {
                 if(data.adjacency[i][j]==1)
                 {
+
                     DEG[j]++;
                 }
             }
         }
+
         for(int i=1;i<=data.numOfTask;++i)
         {
             if(DEG[i]==0) lst.add(i);
@@ -81,6 +89,7 @@ public class Chromosome {
         
         while(lst.size()>0)
         {
+
 //            Collections.sort(lst,(x1,x2)->{
 //                int flag =0;
 //                if(data.durationTime[x1]>data.durationTime[x2]) flag = -1;
@@ -89,6 +98,7 @@ public class Chromosome {
 //            });
             int x = lst.get(0);
             lst.remove(0);
+
             int y = genes[x-1];
             totalExperience += data.Exper[x][y];
             int start = 0;
@@ -146,6 +156,7 @@ public class Chromosome {
         {
 //            totalSalary += data.salaryEachTime[i]*(timeFn[i]-timeSt[i]);
             totalSalary += data.salaryEachTime[i]*working_total[i];
+
         }
     }
 
@@ -164,5 +175,5 @@ public class Chromosome {
     public int[] getTimeFn() {
         return timeFn;
     }
-    
+
 }

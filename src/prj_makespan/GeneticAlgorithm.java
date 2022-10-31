@@ -3,10 +3,12 @@ package prj_makespan;
 
 public class GeneticAlgorithm {
     public static final int NUM_OF_POPULATION = 110;
+
     public static final int NUM_OF_GENARATION = 500;
     public static final int NUM_OF_ELITE_CHOMOSOMES = 10;
     public static final int TOURNAMET_SELECTION_SIZE = 10;
     public static final double MUTATION_RATE = 0.1;
+
     public Population evolve(Population population,Data data)
     {
         return mutatePopulation(crossoverrPopulation(population,data),data);
@@ -16,6 +18,8 @@ public class GeneticAlgorithm {
         Population crossoverPopulation = new Population(population.getChromosomes().length);
         for(int x=0;x<NUM_OF_ELITE_CHOMOSOMES;++x)
         {
+
+
             crossoverPopulation.getChromosomes()[x] = population.getChromosomes()[x];
         }
         for(int x=NUM_OF_ELITE_CHOMOSOMES;x<population.getChromosomes().length;++x)
@@ -31,12 +35,14 @@ public class GeneticAlgorithm {
         Population mutatePopulation = new Population(population.getChromosomes().length);
         for(int x =0; x< NUM_OF_ELITE_CHOMOSOMES;++x)
         {
+
             mutatePopulation.getChromosomes()[x] = population.getChromosomes()[x];
         }
         for(int x = NUM_OF_ELITE_CHOMOSOMES;x<population.getChromosomes().length;++x)
         {
 
                 mutatePopulation.getChromosomes()[x]=mutateChromosome(population.getChromosomes()[x],data);
+
 
             
         }
@@ -69,7 +75,8 @@ public class GeneticAlgorithm {
         }
         return mutateChromosome;
     }
-    
+
+
     private Population selectTournamentPopualtion(Population population,Data data)
     {
         Population tournamentPopulation = new Population(TOURNAMET_SELECTION_SIZE);

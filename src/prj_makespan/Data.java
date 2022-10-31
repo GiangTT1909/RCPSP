@@ -12,6 +12,8 @@ public class Data {
     public int[] salaryEachTime = new int[505];
     public double[][] Z = new double[505][505];
     public int Deadline;
+
+
     public int Budget;
     public double[][] U = new double[505][10005];
     public ArrayList< ArrayList < Integer > > manAbleDo = new ArrayList< ArrayList < Integer > >();
@@ -36,6 +38,7 @@ public class Data {
     }
     public void Setup() // get the limit max of sumsalary , deadline , exper ;
     {
+
 //        for(int i=1;i<=numOfPeople;++i) maxSalary = Math.max(maxSalary,salaryEachTime[i]);
 //        for(int i=1;i<=numOfTask;++i)
 //        {
@@ -56,6 +59,7 @@ public class Data {
         maxEper= 165552;
         maxSalary = 25903115;
         maxDeadline = 1233;
+
         this.w1=1;
         this.w2=1;
         this.w3=1;
@@ -69,5 +73,30 @@ public class Data {
         else if (num==2) this.w2*=20;
         else if (num==3) this.w3*=20;
     }
+
+    public double getW1() {
+        return w1;
+    }
+
+    public void setW1(double w1) {
+        this.w1 = w1;
+    }
+
+    public double getW2() {
+        return w2;
+    }
+
+    public void setW2(double w2) {
+        this.w2 = w2;
+    }
+
+    public double getW3() {
+        return w3;
+    }
+
+    public void setW3(double w3) {
+        this.w3 = w3;
+    }
+
     
 }

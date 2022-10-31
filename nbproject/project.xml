@@ -3,7 +3,11 @@
     <type>org.netbeans.modules.java.j2seproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/j2se-project/3">
+<<<<<<< HEAD
             <name>Prj_Makespan</name>
+=======
+            <name>Prj_Makespan_better</name>
+>>>>>>> c13e69d034395b9bf05c1c5d4aee797c391f63e2
             <source-roots>
                 <root id="src.dir"/>
             </source-roots>

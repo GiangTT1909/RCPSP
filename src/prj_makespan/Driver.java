@@ -15,6 +15,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
+import java.util.Random;
+
+
 public class Driver {
 
     public int numOfPeople;
@@ -31,8 +34,11 @@ public class Driver {
     public double[][] U = new double[505][10005];
     public ArrayList< ArrayList< Integer>> manAbleDo = new ArrayList< ArrayList< Integer>>();
     public int[][] Exper = new int[505][505];
+
+
     public static void main(String[] args) throws IOException {
-        ArrayList <Double > answer = new ArrayList < Double >();
+        ArrayList<Double> answer = new ArrayList< Double>();
+
         Driver driver = new Driver();
         StringBuilder sb = new StringBuilder();
 
@@ -133,55 +139,117 @@ public class Driver {
         Data data = new Data(driver.numOfTask, driver.numOfSkill, driver.numOfPeople, driver.durationTime, driver.adjacency, driver.salaryEachTime, driver.Z, driver.U, driver.Budget, driver.Deadline, driver.manAbleDo, driver.Exper);
         data.Setup();
 
+        System.out.println(data.maxEper);
         // Generate population
         // excel
-     
-        // title
-        
-        
-        // Run Generation
 
-        for(int i=1;i<=1;++i)
-        {
-        
-         data.change_w(4);   
+        // title
+        // Run Generation
+        long endTime = System.currentTimeMillis();
+//        
+//        for(int i=1;i<=1;++i)
+//        {
+        startTime = System.currentTimeMillis();
+        BufferedWriter writer = new BufferedWriter(new FileWriter("data\\output1.txt"));
+        BufferedWriter writer2 = new BufferedWriter(new FileWriter("data\\output2.txt"));
+        BufferedWriter writer3 = new BufferedWriter(new FileWriter("data\\output3.txt"));
+        BufferedWriter writer4 = new BufferedWriter(new FileWriter("data\\output4.txt"));
+        writer2.write("Fitness ; Time Finish ; Total Salary ; Total Exper \n");
+        writer.write("Fitness ; Time Finish ; Total Salary ; Total Exper \n");
+
+        // Generate population
+        // Run Generation
+        // excel
+        // title
+//        System.out.println(data.Budget);
+//        for(int i=0;i<=1;i++){
+//              Random rand = new Random();
+//            int x = rand.nextInt(3);
+//            data.setW1(1);
+//             x = rand.nextInt(3);
+//            data.setW2(1);
+//             x = rand.nextInt(1);
+//            data.setW3(1);
+//               Population population = new Population(GeneticAlgorithm.NUM_OF_POPULATION).initializePopulation(data);
+//        GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm();
+//        int numOfGen = 0;
+//        while (numOfGen < GeneticAlgorithm.NUM_OF_GENARATION) {
+//            
+//            System.out.println(numOfGen+"-"+i);
+//            
+//            population = geneticAlgorithm.evolve(population, data);
+//            population.sortChromosomesByFitness(data);
+//            
+//           
+//            numOfGen++;
+//         
+//
+//            }
+//         writer2.write(population.getChromosomes()[0].getFitness(data)+ ";" + population.getChromosomes()[0].timeFinish +";" + population.getChromosomes()[0].totalSalary+ " ;" + population.getChromosomes()[0].totalExperience+ "\n");
+////       
+//        }
+//        
+
+
+
         Population population = new Population(GeneticAlgorithm.NUM_OF_POPULATION).initializePopulation(data);
         GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm();
         int numOfGen = 0;
         while (numOfGen < GeneticAlgorithm.NUM_OF_GENARATION) {
             
+
+            System.out.println(numOfGen);
             
-            Chromosome best1 = population.getChromosomes()[0];
-             best1.recalculateFitness(data);
-            System.out.println(best1.getFitness(data));
             population = geneticAlgorithm.evolve(population, data);
             population.sortChromosomesByFitness(data);
+            
+            writer2.write(population.getChromosomes()[0].getFitness(data)+ ";" + population.getChromosomes()[0].timeFinish +";" + population.getChromosomes()[0].totalSalary+ " ;" + population.getChromosomes()[0].totalExperience+ "\n");
             numOfGen++;
+}
+            writer3.write(population.getChromosomes()[0].getFitness(data)+ ";" + population.getChromosomes()[0].timeFinish +";" + population.getChromosomes()[0].totalSalary+ " ;" + population.getChromosomes()[0].totalExperience+ "\n");
+
             
-            
+//             for(int i=0;i<driver.numOfTask;i++){
+//            writer3.write(population.getChromosomes()[0].genes[i]+" "+population.getChromosomes()[0].getBeginTask()[i+1]+" "+population.getChromosomes()[0].getEndTask()[i+1]+"\n");
+//        }
+//        for (int i = 0; i <= 150; i++) {
+//            Random rand = new Random();
+//            int x = rand.nextInt(10);
+//            data.setW1(x);
+//            x = rand.nextInt(10);
+//            data.setW2(x);
+//            x = rand.nextInt(10);
+//            data.setW3(x);
+//            Population population = new Population(GeneticAlgorithm.NUM_OF_POPULATION).initializePopulation(data);
+//            GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm();
+//            int numOfGen = 0;
+//            while (numOfGen < GeneticAlgorithm.NUM_OF_GENARATION) {
+//
+//                System.out.println(numOfGen + "-" + i);
+//
+//                population = geneticAlgorithm.evolve(population, data);
+//                population.sortChromosomesByFitness(data);
+//
+//                numOfGen++;
+//
+//            }
+//            writer2.write(population.getChromosomes()[0].getFitness(data) + ";" + population.getChromosomes()[0].timeFinish + ";" + population.getChromosomes()[0].totalSalary + " ;" + population.getChromosomes()[0].totalExperience + "\n");
+////       
+//        }
+//
+        writer.close();
+        writer2.close();
+        writer3.close();
+        writer4.close();
 
-            }
-        
-   
-        Chromosome best = population.getChromosomes()[0];
-        int[] task_mem = new int[data.numOfPeople+1];
-        for (int j=0;j<data.numOfPeople;j++){
-            task_mem[j] = 0;
-        }
-        for (int j =0; j<data.numOfTask;j++){
-            int member = best.getGenes()[j];
-            task_mem[member]++;
-        }
-        best.recalculateFitness(data);
-
-         System.out.println(best.timeFinish);
- 
-        
-
-        long endTime = System.currentTimeMillis();
-        System.out.println(endTime - startTime);
     }
-    }
+//            int[] genes = population.getChromosomes()[0].getGenes();
+//            for (int j=0;j<genes.length;j++){
+//                System.out.println("Task "+j+": "+genes[j]);
+//            }
+
+//        System.out.println(endTime - startTime);
+
     public ArrayList< ArrayList< Integer>> ManAbleDo(int[][] K, int[][] R, int n, int m, int s) {
         ArrayList< ArrayList< Integer>> manAbleDo = new ArrayList< ArrayList< Integer>>();
         for (int i = 1; i <= n; ++i) {
